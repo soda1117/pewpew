@@ -25,17 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // 화면 전환 함수 (수정됨)
     function showScreen(screenToShow) {
         const screens = [startScreen, quizScreen, resultScreen];
-        // 모든 화면을 먼저 숨기고(active 클래스 제거 + display none)
+        // 모든 화면에서 active 클래스 제거
         screens.forEach(screen => {
             screen.classList.remove('active');
-            screen.style.display = 'none';
+            // 여기서는 style.display = 'none';을 제거합니다.
+            // CSS의 visibility와 opacity 전환으로 충분합니다.
         });
 
-        // 보여줄 화면만 flex로 보이게 하고 active 클래스 부여
-        screenToShow.style.display = 'flex';
-        setTimeout(() => {
-            screenToShow.classList.add('active');
-        }, 10); // 약간의 딜레이로 애니메이션 유지
+        // 보여줄 화면만 active 클래스 부여
+        screenToShow.classList.add('active');
     }
 
     // 퀴즈 시작
@@ -45,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let president in scores) {
             scores[president] = 0;
         }
-        showScreen(quizScreen);
+        showScreen(quizScreen); // 퀴즈 화면으로 전환
         loadQuestion();
     });
 
@@ -152,6 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 초기 화면 설정
-    showScreen(startScreen);
+    // 초기 화면 설정 로직 삭제: HTML에 .active 클래스가 이미 있으므로 스크립트에서 초기 설정을 할 필요 없음.
+    // showScreen(startScreen); // 이 줄을 제거했습니다.
 });
