@@ -1,0 +1,28 @@
+/* 결과 모션 추가 */
+.result-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  margin-top: 16px;
+  animation: fadeInScale 0.85s cubic-bezier(.23,1.29,.61,1.01);
+}
+@keyframes fadeInScale {
+  from { opacity: 0; transform: scale(.86) translateY(48px);}
+  to   { opacity: 1; transform: scale(1) translateY(0);}
+}
+
+/* 결과 리스트 순차 등장 모션 */
+.result-list .result-row {
+  opacity: 0;
+  transform: translateY(24px) scale(.96);
+  animation: rowFadeIn 0.55s cubic-bezier(.45,1.24,.67,1.01) forwards;
+}
+.result-list .result-row:nth-child(1) { animation-delay: 0.18s;}
+.result-list .result-row:nth-child(2) { animation-delay: 0.29s;}
+.result-list .result-row:nth-child(3) { animation-delay: 0.4s;}
+.result-list .result-row:nth-child(4) { animation-delay: 0.51s;}
+.result-list .result-row:nth-child(5) { animation-delay: 0.62s;}
+@keyframes rowFadeIn {
+  to { opacity: 1; transform: translateY(0) scale(1);}
+}
