@@ -22,21 +22,20 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     const totalQuestions = quizQuestions.length;
 
-    // 화면 전환 함수
+    // 화면 전환 함수 (수정됨)
     function showScreen(screenToShow) {
         const screens = [startScreen, quizScreen, resultScreen];
+        // 모든 화면을 먼저 숨기고(active 클래스 제거 + display none)
         screens.forEach(screen => {
             screen.classList.remove('active');
-            // 애니메이션을 위한 setTimeout
-            setTimeout(() => {
-                screen.style.display = 'none'; // 비활성화 시 숨김
-            }, 300); // CSS transition 시간과 동일하게
+            screen.style.display = 'none';
         });
 
-        screenToShow.style.display = 'flex'; // 활성화 시 다시 보이게
+        // 보여줄 화면만 flex로 보이게 하고 active 클래스 부여
+        screenToShow.style.display = 'flex';
         setTimeout(() => {
             screenToShow.classList.add('active');
-        }, 10); // 약간의 딜레이를 주어 transition이 작동하도록
+        }, 10); // 약간의 딜레이로 애니메이션 유지
     }
 
     // 퀴즈 시작
@@ -131,8 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const matchRate = ((maxScore / totalQuestions) * 100).toFixed(1);
         resultMatchRate.textContent = `당신은 ${mostSimilarPresident.name}와(과) ${matchRate}% 일치합니다!`;
 
-        // 다른 대통령들 결과 표시
-        otherPresidentsList.innerHTML = ''; // 기존 내용 지우기
+        // 다른 대통령 결과 표시
+        otherPresidentsList.innerHTML = ''; // 기존 내용 삭제
         const sortedPresidents = Object.keys(scores).sort((a, b) => scores[b] - scores[a]); // 점수 높은 순 정렬
 
         sortedPresidents.forEach(presidentId => {
