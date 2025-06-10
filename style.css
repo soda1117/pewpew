@@ -61,7 +61,10 @@ body {
     box-sizing: border-box;
     opacity: 0;
     visibility: hidden;
-    transition: opacity var(--transition-speed) ease-in-out, transform var(--transition-speed) ease-in-out;
+    /* visibility 전환 시간 추가: opacity 전환이 끝난 후 visibility: hidden;으로 변경 */
+    transition: opacity var(--transition-speed) ease-in-out, 
+                transform var(--transition-speed) ease-in-out, 
+                visibility 0s linear var(--transition-speed); 
     transform: translateY(20px); /* 슬라이드 효과 */
 }
 
@@ -69,6 +72,9 @@ body {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
+    /* active 시에는 visibility 전환 시간을 제거하여 즉시 보이게 함 */
+    transition: opacity var(--transition-speed) ease-in-out, 
+                transform var(--transition-speed) ease-in-out;
 }
 
 /* 시작 화면 */
