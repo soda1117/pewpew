@@ -1,14 +1,48 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>나는 어떤 기후정책 정치가와 닮았을까?</title>
-  <meta name="viewport" content="width=1280, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>나는 어떤 기후 정책 성향의 정치인과 닮았을까?</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div id="game-container"></div>
-  <script src="quiz-data.js"></script>
-  <script src="script.js"></script>
+    <div id="game-container">
+        <div id="start-screen" class="screen active">
+            <h1>나는 어떤 기후 정책 성향의 정치인과 닮았을까?</h1>
+            <p>기후 환경 정책에 대한 10가지 질문을 통해 당신의 성향을 알아보세요!</p>
+            <button id="start-button">시작하기</button>
+        </div>
+
+        <div id="quiz-screen" class="screen">
+            <div id="progress-container">
+                <div id="progress-bar"></div>
+            </div>
+            <p id="question-number"></p>
+            <h2 id="question-text"></h2>
+            <div id="options-container">
+                </div>
+        </div>
+
+        <div id="result-screen" class="screen">
+            <div id="main-result">
+                <h3>당신은...</h3>
+                <img id="result-president-photo" alt="결과 대통령 사진">
+                <h2 id="result-president-name"></h2>
+                <p id="result-match-rate"></p>
+            </div>
+            <div id="other-results-container">
+                <h4>다른 대통령과의 일치 응답률</h4>
+                <div id="other-presidents-list">
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="quiz-data.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
