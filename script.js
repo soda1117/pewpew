@@ -12,6 +12,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultMatchRate = document.getElementById('result-match-rate');
     const otherPresidentsList = document.getElementById('other-presidents-list');
 
+    // 새로운 요소 추가: 모달 관련 (script.js에서 동적으로 생성)
+    const modal = document.createElement('div');
+    modal.id = 'president-modal';
+    modal.classList.add('modal');
+    modal.innerHTML = `
+        <span class="close-button">&times;</span>
+        <img class="modal-content" id="modal-president-photo">
+    `;
+    document.body.appendChild(modal);
+
+    const modalPresidentPhoto = document.getElementById('modal-president-photo');
+    const closeButton = document.querySelector('.close-button');
+
+    // 모달 닫기 이벤트 리스너
+    closeButton.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    // 모달 외부 클릭 시 닫기
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
     let currentQuestionIndex = 0;
     let scores = {
         ardern: 0,
@@ -73,8 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function selectOption(selectedButton, presidentId) {
         // 모든 선택지 클릭 방지 및 이전 선택 상태 제거
         Array.from(optionsContainer.children).forEach(button => {
-            button.disabled = true;
-            button.classList.remove('selected');
+            button.disabled = true; // 선택지 비활성화
+            button.classList.remove('selected'); // 혹시 모를 이전 선택 상태 제거
         });
 
         // 선택된 버튼에 'selected' 클래스 추가 (클릭 모션 및 색상 변경)
@@ -115,9 +140,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const mostSimilarPresident = presidentsInfo[mostSimilarPresidentId];
-        resultPresidentPhoto.src = mostSimilarPresident.photo;
+        resultPresidentPhoto.src = mostSimilarPresident.photo; // 원 모양 사진
         resultPresidentPhoto.alt = mostSimilarPresident.name;
         resultPresidentName.textContent = mostSimilarPresident.name;
+
+        // 결과 대통령 사진 클릭 이벤트 추가
+        // 기존 리스너가 있다면 제거하여 중복 방지 (여러 번 showResult 호출될 경우)
+        resultPresidentPhoto.removeEventListener('click', showPresidentPoster); 
+        resultPresidentPhoto.addEventListener('click', showPresidentPoster);
+
+        function showPresidentPoster() {
+            modal.style.display = 'flex'; // flex로 설정하여 CSS의 justify-content, align-items 적용
+            modalPresidentPhoto.src = mostSimilarPresident.poster; // 포스터 URL (만약 presidentsInfo에 poster 속성이 있다면)
+            // 만약 presidentsInfo에 poster 속성이 없고 그냥 큰 사진이라면:
+            // modalPresidentPhoto.src = mostSimilarPresident.photo; 
+        }
+
 
         // 일치 응답률 계산 및 표시
         const matchRate = ((maxScore / totalQuestions) * 100).toFixed(1);
