@@ -22,21 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     const totalQuestions = quizQuestions.length;
 
-    // 화면 전환 함수 (수정됨)
+    // 화면 전환 함수: 모든 화면에서 'active' 클래스 제거 후, 보여줄 화면에 'active' 클래스 부여
     function showScreen(screenToShow) {
         const screens = [startScreen, quizScreen, resultScreen];
-        // 모든 화면에서 active 클래스 제거
         screens.forEach(screen => {
             screen.classList.remove('active');
-            // 여기서는 style.display = 'none';을 제거합니다.
-            // CSS의 visibility와 opacity 전환으로 충분합니다.
         });
-
-        // 보여줄 화면만 active 클래스 부여
         screenToShow.classList.add('active');
     }
 
-    // 퀴즈 시작
+    // 퀴즈 시작 버튼 클릭 이벤트 리스너
     startButton.addEventListener('click', () => {
         currentQuestionIndex = 0;
         // 점수 초기화
@@ -47,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         loadQuestion();
     });
 
-    // 질문 로드
+    // 질문 로드 함수
     function loadQuestion() {
         if (currentQuestionIndex < totalQuestions) {
             const questionData = quizQuestions[currentQuestionIndex];
@@ -69,20 +64,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
             updateProgressBar();
         } else {
-            // 모든 문제 완료
+            // 모든 문제 완료 시 결과 화면 표시
             showResult();
         }
     }
 
-    // 선택지 선택
+    // 선택지 선택 함수
     function selectOption(selectedButton, presidentId) {
-        // 모든 선택지 클릭 방지
+        // 모든 선택지 클릭 방지 및 이전 선택 상태 제거
         Array.from(optionsContainer.children).forEach(button => {
             button.disabled = true;
-            button.classList.remove('selected'); // 혹시 모를 이전 선택 상태 제거
+            button.classList.remove('selected');
         });
 
-        // 선택된 버튼에 selected 클래스 추가 (색상 변경)
+        // 선택된 버튼에 'selected' 클래스 추가 (클릭 모션 및 색상 변경)
         selectedButton.classList.add('selected');
 
         // 점수 기록
@@ -95,13 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500); // 0.5초 후 다음 문제 로드
     }
 
-    // 진행 바 업데이트
+    // 진행 바 업데이트 함수
     function updateProgressBar() {
         const progress = ((currentQuestionIndex) / totalQuestions) * 100;
         progressBar.style.width = `${progress}%`;
     }
 
-    // 결과 화면 표시
+    // 결과 화면 표시 함수
     function showResult() {
         showScreen(resultScreen);
 
@@ -114,8 +109,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 maxScore = scores[presidentId];
                 mostSimilarPresidentId = presidentId;
             } else if (scores[presidentId] === maxScore) {
-                // 동점일 경우, 첫 번째로 발견된 대통령으로 일단 설정 (랜덤성 추가 필요 시 로직 변경)
-                // 현재는 무작위성을 부여하지 않고 그대로 둠
+                // 동점일 경우, 현재 로직에서는 첫 번째로 발견된 대통령으로 설정됩니다.
+                // 랜덤성을 추가하려면 여기에 로직 변경이 필요합니다.
             }
         }
 
@@ -124,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resultPresidentPhoto.alt = mostSimilarPresident.name;
         resultPresidentName.textContent = mostSimilarPresident.name;
 
-        // 일치 응답률 계산: (획득 점수 / 총 질문 수) * 100
+        // 일치 응답률 계산 및 표시
         const matchRate = ((maxScore / totalQuestions) * 100).toFixed(1);
         resultMatchRate.textContent = `당신은 ${mostSimilarPresident.name}와(과) ${matchRate}% 일치합니다!`;
 
@@ -150,6 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 초기 화면 설정 로직 삭제: HTML에 .active 클래스가 이미 있으므로 스크립트에서 초기 설정을 할 필요 없음.
-    // showScreen(startScreen); // 이 줄을 제거했습니다.
+    // HTML에 '.active' 클래스가 'start-screen'에 이미 적용되어 있으므로, 
+    // DOMContentLoaded 시점에 스크립트에서 별도로 초기 화면을 설정할 필요가 없습니다.
+    // showScreen(startScreen); // 이 줄은 의도적으로 제거되었습니다.
 });
