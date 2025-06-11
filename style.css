@@ -1,11 +1,11 @@
 :root {
     /* 파스텔 톤 색상 정의 */
-    --pastel-red: #FFABAB; /* 1번 선택지 */
-    --pastel-orange: #FFD4A2; /* 2번 선택지 */
-    --pastel-yellow: #FFFAC1; /* 3번 선택지 */
-    --pastel-green: #B2EBF2; /* 4번 선택지 */
-    --pastel-blue: #A2D9F7; /* 5번 선택지 */
-
+    --pastel-red: #ffb3b3; /* 1번 선택지 */
+    --pastel-orange: #ffd19f; /* 2번 선택지 */
+    --pastel-yellow: #fff3ac; /* 3번 선택지 */
+    --pastel-green: #c4ffbc; /* 4번 선택지 */
+    --pastel-blue: #bae4ff; /* 5번 선택지 */
+    
     /* 선택지 클릭 시 연한 색상 */
     --light-pastel-red: #FFDCDC;
     --light-pastel-orange: #FFEADB;
