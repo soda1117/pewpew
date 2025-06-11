@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const quizScreen = document.getElementById('quiz-screen');
     const resultScreen = document.getElementById('result-screen');
     const startButton = document.getElementById('start-button');
-    const progressBar = document.getElementById('progress-bar');
+    // const progressBar = document.getElementById('progress-bar'); // 진행 바 삭제
     const questionNumberElement = document.getElementById('question-number');
     const questionTextElement = document.getElementById('question-text');
     const optionsContainer = document.getElementById('options-container');
@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 optionsContainer.appendChild(button);
             });
 
-            updateProgressBar();
+            // updateProgressBar(); // 진행 바 삭제로 인해 호출 제거
         } else {
             // 모든 문제 완료 시 결과 화면 표시
             showResult();
@@ -115,11 +115,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500); // 0.5초 후 다음 문제 로드
     }
 
-    // 진행 바 업데이트 함수
+    // 진행 바 업데이트 함수 (삭제됨)
+    /*
     function updateProgressBar() {
         const progress = ((currentQuestionIndex) / totalQuestions) * 100;
         progressBar.style.width = `${progress}%`;
     }
+    */
 
     // 결과 화면 표시 함수
     function showResult() {
@@ -146,14 +148,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 결과 대통령 사진 클릭 이벤트 추가
         // 기존 리스너가 있다면 제거하여 중복 방지 (여러 번 showResult 호출될 경우)
-        resultPresidentPhoto.removeEventListener('click', showPresidentPoster); 
+        resultPresidentPhoto.removeEventListener('click', showPresidentPoster);
         resultPresidentPhoto.addEventListener('click', showPresidentPoster);
 
         function showPresidentPoster() {
             modal.style.display = 'flex'; // flex로 설정하여 CSS의 justify-content, align-items 적용
             modalPresidentPhoto.src = mostSimilarPresident.poster; // 포스터 URL (만약 presidentsInfo에 poster 속성이 있다면)
             // 만약 presidentsInfo에 poster 속성이 없고 그냥 큰 사진이라면:
-            // modalPresidentPhoto.src = mostSimilarPresident.photo; 
+            // modalPresidentPhoto.src = mostSimilarPresident.photo;
         }
 
 
