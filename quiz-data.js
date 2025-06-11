@@ -1,3 +1,32 @@
+const presidentsInfo = {
+    ardern: {
+        name: "저신다 아던",
+        photo: "images/저신다 아던.jpg",
+        poster: "images/저신다전체.jpg" 
+    },
+    biden: {
+        name: "조 바이든",
+        photo: "images/바이든.jpg",
+        poster: "images/바이든전체.jpg" 
+    },
+    macron: {
+        name: "에마뉘엘 마크롱",
+        photo: "images/마크롱.jpg",
+        poster: "images/마크롱전체.jpg"
+    },
+    bolsonaro: {
+        name: "자이르 보우소나루",
+        photo: "images/보우소나루.jpg",
+        poster: "images/보우소나루전체.jpg"
+    },
+    xi: {
+        name: "시진핑",
+        photo: "images/시진핑.jpg",
+        poster: "images/시진핑전체.jpg"
+    }
+};
+
+
 const quizQuestions = [
     {
         question: "시민들이 기후 정책에 반발하거나 시위할 경우, 정부의 태도는?",
