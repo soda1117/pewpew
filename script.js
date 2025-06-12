@@ -49,10 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 화면 전환 함수: 모든 화면에서 'active' 클래스 제거 후, 보여줄 화면에 'active' 클래스 부여
     function showScreen(screenToShow) {
-        const screens = [startScreen, quizScreen, resultScreen];
-        screens.forEach(screen => {
-            screen.classList.remove('active');
-        });
+        [startScreen, quizScreen, resultScreen].forEach(screen => screen.classList.remove('active'));
         screenToShow.classList.add('active');
     }
 
@@ -115,14 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500); // 0.5초 후 다음 문제 로드
     }
 
-    // 진행 바 업데이트 함수 (삭제됨)
-    /*
-    function updateProgressBar() {
-        const progress = ((currentQuestionIndex) / totalQuestions) * 100;
-        progressBar.style.width = `${progress}%`;
-    }
-    */
-
     // 결과 화면 표시 함수
     function showResult() {
         showScreen(resultScreen);
@@ -153,11 +142,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function showPresidentPoster() {
             modal.style.display = 'flex'; // flex로 설정하여 CSS의 justify-content, align-items 적용
-            modalPresidentPhoto.src = mostSimilarPresident.poster; // 포스터 URL (만약 presidentsInfo에 poster 속성이 있다면)
-            // 만약 presidentsInfo에 poster 속성이 없고 그냥 큰 사진이라면:
-            // modalPresidentPhoto.src = mostSimilarPresident.photo;
+            // poster가 있으면 poster, 없으면 photo 사용
+            modalPresidentPhoto.src = mostSimilarPresident.poster ? mostSimilarPresident.poster : mostSimilarPresident.photo;
+            modalPresidentPhoto.alt = mostSimilarPresident.name;
         }
-
 
         // 일치 응답률 계산 및 표시
         const matchRate = ((maxScore / totalQuestions) * 100).toFixed(1);
@@ -184,8 +172,4 @@ document.addEventListener('DOMContentLoaded', () => {
             otherPresidentsList.appendChild(item);
         });
     }
-
-    // HTML에 '.active' 클래스가 'start-screen'에 이미 적용되어 있으므로, 
-    // DOMContentLoaded 시점에 스크립트에서 별도로 초기 화면을 설정할 필요가 없습니다.
-    // showScreen(startScreen); // 이 줄은 의도적으로 제거되었습니다.
 });
