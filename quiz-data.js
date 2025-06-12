@@ -20,7 +20,7 @@ const quizQuestions = [
         ]
     },
     {
-        question: "자동차 정책을 바꾸려면?",
+        question: "자동차 정책을 새롭게 바꾸려면 어떤 정책을 사용할까¿",
         options: [
             { text: "시민과 논의하여 지역별 맞춤 제한 조치를 도입한다.", president: "ardern" },
             { text: "유류세 조정과 전기차 보급 확대 병행한다.", president: "macron" },
@@ -50,7 +50,7 @@ const quizQuestions = [
         ]
     },
     {
-        question: "기후위기 교육 확대 시?",
+        question: "기후교육을 어떤 방법으로 확대시킬까?",
         options: [
             { text: "학생 직접 참여형 기후 교육을 운영한다.", president: "ardern" },
             { text: "산업·환경 연계 실용 교육 중심으로 개편한다.", president: "macron" },
